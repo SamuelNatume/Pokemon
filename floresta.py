@@ -2,6 +2,8 @@ import random
 caverna = ["Zubat", "Geodude", "Aaron", "Onix"]
 mato = ["Weedle", "Caterpie", "Metapod", "Bellsprout"]
 pokedex=[]
+pob_capt_mato=0.5
+pob_capt_caverna=0.35
 print("Oi, olá!\nÉ um prazer conhecê-lo!\nBem-vindo ao fabuloso mundo POKéMON!\nMeu nome é CARVALHO!\nMas todos aqui me chamam de PROFESSOR OAK.\nEste mundo...,\n...é habitado por várias criaturas chamadas de POKéMON.\nMas primeiro, me fale um pouco sobre você!\nAgora diga-me.")
 while True:
     try:
@@ -66,17 +68,19 @@ while True:
     elif escolha ==2:
         while True:
             print("Você está adentrando o mato...")
+            pokemon_aleatorio=random.choice(mato)
+            print(f"Você entrou no mato e encontrou um {pokemon_aleatorio}!")
+            resposta=input("Deseja capturar esse pokémon (S/N)")
+
             if pokemon_aleatorio in pokedex:
                 print(f"Você ja tem esse o {pokemon_aleatorio} em sua Pokedex!")
                 print("Volte para a escolha de caminhos e continue sua aventura!")
                 break
-            pokemon_aleatorio=random.choice(mato)
-            print(f"Você entrou no mato e encontrou um {pokemon_aleatorio}!")
-            resposta=input("Deseja capturar esse pokémon (S/N)")
+
             if resposta=="S" or resposta=="s":
-                pokedex.append(pokemon_aleatorio)
-                print(f"Você capturou o {pokemon_aleatorio}")
-                break
+                    pokedex.append(pokemon_aleatorio)
+                    print(f"Você capturou o {pokemon_aleatorio}")
+                    break
             elif resposta=="N" or resposta=="n":
                 break
             else:
