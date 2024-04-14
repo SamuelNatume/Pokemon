@@ -4,6 +4,8 @@ mato = ["Weedle", "Caterpie", "Metapod", "Bellsprout"]
 pokedex=[]
 prob_capt_mato=0.5
 prob_capt_caverna=0.35
+tentativas_extras=0
+resposta2=None
 print(60*"-")
 print("                            |MUNDO POKÉMON|")
 print(60*"-")
@@ -43,6 +45,8 @@ while True:
     [3] Mostrar Pokédex
     [4] Sair      ''')
     escolha = int(input("Escolha uma opção: "))
+    if tentativas_extras>=3:
+        break
     if escolha==4:
         print(f"Até logo {nome}!\n Espero te reencontrar novamente.")
         break
@@ -66,25 +70,40 @@ while True:
             else:
                 continue
     elif escolha ==2:
-        while True:
-            print("Você está adentrando o mato...")
-            pokemon_aleatorio=random.choice(mato)
-            print(f"Você entrou no mato e encontrou um {pokemon_aleatorio}!")
-            resposta=input("Deseja tentar capturar esse pokémon (S/N)")
-            if resposta=="S" or resposta=="s":
+        print("Você está adentrando o mato...")
+        pokemon_aleatorio=random.choice(mato)
+        print(f"Você está no mato e encontrou um {pokemon_aleatorio}!")
+        resposta=input("Deseja tentar capturar esse pokémon (S/N)")
+        if resposta=="S" or resposta=="s":
                 if random.random() <= prob_capt_caverna:
                     pokedex.append(pokemon_aleatorio)
                     print(f"Parabéns!\nVocê capturou o {pokemon_aleatorio}!")
-                    break
                 else:
-                    print(f"O {pokemon_aleatorio} escapou!")
-            elif resposta=="N" or resposta=="n":
-                break
-            else:
-                continue
+                    while resposta2=="S" or resposta2=="s":
+                        print(f"O {pokemon_aleatorio} escapou!")
+                        resposta2=input(f"Quer tentar capturar novamente (S/N)")
+                        if resposta2=="S" or resposta2=="s":
+                                tentativas_extras+=1
+                                if random.random() <= prob_capt_caverna:
+                                    pokedex.append(pokemon_aleatorio)
+                                    print(f"Parabéns!\nVocê capturou o {pokemon_aleatorio}!")
+                                    break
+                                    
+                                else: 
+                                    print(f"O {pokemon_aleatorio} escapou!")
+                                    resposta2=input(f"Quer tentar capturar novamente (S/N)")
+                                    continue
+                                   
+                           
+        elif resposta=="N" or resposta=="n":
+            break
+        else:
+                    print("Erro!")
+                    continue
     elif escolha==3:
+        print("===POKÉDEX===")
         for pokemon_cap in pokedex:
-            print(f"===POKÉDEX===\n -{pokemon_cap}\n======")
+            print(f"-{pokemon_cap}")
             continue
 
 
